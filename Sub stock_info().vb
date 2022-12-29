@@ -26,26 +26,28 @@ For Each ws In ThisWorkbook.Worksheets
                 start_stock = ws.Cells(r + 1, 3).Value
                 summary_row = summary_row + 1
             Else
+                ws.Cells(summary_row, 9).Value = ws.Cells(r, 1).Value
+                ws.Cells(summary_row, 12).Value = Round(volume, 2)
                 end_stock = ws.Cells(r, 6).Value
                 yr_change = end_stock - start_stock
-                per_change = yr_change / end_stock
+                per_change = yr_change / start_stock
                 ws.Cells(summary_row, 10).Value = Round(yr_change, 2)
                 If ws.Cells(summary_row, 10).Value > 0 Then
                     ws.Cells(summary_row, 10).Interior.Color = vbGreen
                 ElseIf ws.Cells(summary_row, 10).Value < 0 Then
                     ws.Cells(summary_row, 10).Interior.Color = vbRed
                 End If
-                ws.Cells(summary_row, 11).Value = FormatPercent(Round(per_change, 2))
+                ws.Cells(summary_row, 11).Value = FormatPercent(per_change)
                 start_stock = ws.Cells(r + 1, 3).Value
                 volume = volume + ws.Cells(r, 7).Value
                 If per_change > max_inc Then
                     max_inc = per_change
-                    ws.Cells(2, 17).Value = FormatPercent(Round(max_inc, 2))
+                    ws.Cells(2, 17).Value = FormatPercent(max_inc)
                     ws.Cells(2, 16).Value = ws.Cells(summary_row, 9).Value
                 End If
                 If per_change < max_dec Then
                     max_dec = per_change
-                    ws.Cells(3, 17).Value = FormatPercent(Round(max_dec, 2))
+                    ws.Cells(3, 17).Value = FormatPercent(max_dec)
                     ws.Cells(3, 16).Value = ws.Cells(summary_row, 9).Value
                 End If
                 If volume > max_vol Then
@@ -53,8 +55,7 @@ For Each ws In ThisWorkbook.Worksheets
                     ws.Cells(4, 17).Value = max_vol
                     ws.Cells(4, 16).Value = ws.Cells(summary_row, 9).Value
                  End If
-                ws.Cells(summary_row, 9).Value = ws.Cells(r, 1).Value
-                ws.Cells(summary_row, 12).Value = volume
+                
                 summary_row = summary_row + 1
                 volume = 0
             End If
@@ -70,7 +71,7 @@ For Each ws In ThisWorkbook.Worksheets
     ws.Range("j1:k1").ColumnWidth = 14.5
     ws.Range("L1").ColumnWidth = 18
     ws.Range("o1").ColumnWidth = 21
-    ws.Range("P1:Q1").ColumnWidth = 12
+    ws.Range("P1:Q1").ColumnWidth = 8
     ws.Range("J1").Interior.ColorIndex = 0
     
     ws.Cells(1, 9).Value = "Ticker"
