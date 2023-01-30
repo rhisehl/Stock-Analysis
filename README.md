@@ -1,4 +1,4 @@
-# Week 2 VBA Challenge
+# Stock Price Analysis
 
 Completed an analysis of 2018 - 2020 stock data for a variety of companies. 2019 saw the maximum stock price percentage increase at 190.03%. The maximum stock price percentage decreases remained steady throughout the time period. The highest stock volume increased by more than double between 2018 and 2019, and then dropped slightly (but still significantly above 2018) in 2020. Overall, it appears that stocks in 2018 faired worse across the board, with greatest increases and greatest volume being the lowest of the time period.
 
